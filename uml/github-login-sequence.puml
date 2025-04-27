@@ -1,0 +1,17 @@
+@startuml login
+participant User
+participant NextjsApp
+participant NextAuth
+participant Github
+
+User->NextjsApp:1. Click "Sign in with Github"
+NextjsApp->NextAuth:2. Initiate authentication
+NextAuth->Github:3. Redirect to Github OAuth
+Github->User:4. Request authorization
+User->Github:5. Grant permission
+Github->NextAuth:6. Send authorization code
+NextAuth->Github:7. Exchange code for acess token
+Github->NextAuth:8. Return access token
+NextAuth->Github:9. Request access token
+Github->NextAuth:10. Return user data
+@enduml
