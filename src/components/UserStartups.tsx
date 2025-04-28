@@ -9,6 +9,7 @@ export default async function UserStartups({ id }: { id: string }) {
   return (
     <>
       {
+        // @ts-expect-error: Undetectable type error
         startups.length > 0 ? startups.map((startup: StartupTypeCard) => (
           <StartupCard key={startup._id} post={startup} />
         )) : (

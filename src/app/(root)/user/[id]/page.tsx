@@ -27,8 +27,8 @@ export default async function page({ params }: { params: Promise<{ id: string }>
 					</div>
 
 					<Image
-						src={user.image}
-						alt={user.name}
+						src={user.image || "/author_fallback.png"}
+						alt={user.name || "Author"}
 						width={220}
 						height={220}
 						className="profile_image"

@@ -6,7 +6,7 @@ import { parseServerActionResponse } from "./utils"
 import slugify from "slugify"
 
 export const createPitch = async (
-  state: never,
+  state: object,
   form: FormData,
   pitch: string
 ) => {

@@ -17,7 +17,6 @@ export default function StartupForm({}: Props) {
 	const [errors, setErrors] = React.useState<Record<string, string>>({})
 	const [pitch, setPitch] = React.useState("")
   const router = useRouter()
-	// const isPending = false
 
   const handleFormSubmit = async (prevState: object, formData: FormData) => {
     try {

@@ -17,7 +17,7 @@ export default async function Page(
 ) {
   const id = (await params).id
 
-  // Do parallel fetching because each data is independent
+  // @ts-expect-error: Undetectable type error
   const [post, { select: editorPosts }] = await Promise.all([
 		client.fetch(STARTUP_BY_ID_QUERY, { id }),
 		client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks" }),

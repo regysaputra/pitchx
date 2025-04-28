@@ -6,6 +6,7 @@ import { writeClient } from "@/sanity/lib/write-client"
 import { after } from "next/server"
 
 export default async function View({ id }: { id: string }) {
+  // @ts-expect-error: Undetectable type error
 	const { views: totalViews } = await client
 		.withConfig({ useCdn: false })
 		.fetch(STARTUP_VIEWS_QUERY, { id })
