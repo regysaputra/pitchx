@@ -38,8 +38,8 @@ export default async function Page(
 			</section>
 
 			<section className="section_container">
-				<img
-					src={post.image}
+				<Image
+					src={post.image || "/thumbnail_fallback.png"}
 					alt="thumbnail"
 					className="w-full h-auto rounded-xl"
 				/>
@@ -50,7 +50,7 @@ export default async function Page(
 							className="flex gap-2 items-center mb-3"
 						>
 							<Image
-								src={post.author?.image}
+								src={post.author?.image || "/author_fallback.png"}
 								alt="avatar"
 								width={64}
 								height={64}
