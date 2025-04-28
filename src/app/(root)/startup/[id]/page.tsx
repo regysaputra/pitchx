@@ -41,6 +41,8 @@ export default async function Page(
 				<Image
 					src={post.image || "/thumbnail_fallback.png"}
 					alt="thumbnail"
+          width={1200}
+          height={800}
 					className="w-full h-auto rounded-xl"
 				/>
 				<div className="space-y-5 mt-10 max-w-4xl mx-auto">
