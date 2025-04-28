@@ -1,14 +1,14 @@
 import { defineQuery } from "next-sanity";
 
-export const STARTUPS_QUERY = 
-  defineQuery(`*[_type == "startup" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search] | order(_createdAt desc) {
+export const STARTUPS_QUERY =
+	defineQuery(`*[_type == "startup" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search] | order(_createdAt desc) {
     _id,
+    _type,
+    _createdAt,
+    _updatedAt,
+    _rev,
     title,
     slug,
-    _createdAt,
-    _type,
-    _rev,
-    _updatedAt,
     author -> {
       _id, username, name, image, bio
     },

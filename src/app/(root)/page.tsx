@@ -30,6 +30,7 @@ export default async function Home({ searchParams }: {
 
 				<ul className="mt-7 card_grid">
 					{posts?.length > 0 ? (
+            // @ts-expect-error: Undetectable code error
 						posts?.map((post: StartupTypeCard) => <StartupCard key={post?._id} post={post} />)
 					) : (
 						<p className="no-results">No startups found</p>
