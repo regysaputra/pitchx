@@ -5,14 +5,55 @@ import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries"
 import { client } from "@/sanity/lib/client"
 import { writeClient } from "@/sanity/lib/write-client"
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+if (typeof NextAuth !== "function") {
+  throw new Error("Expected NextAuth to be a function")
+}
+
+interface User {
+  name: string;
+  email: string;
+  image: string;
+}
+
+interface Profile {
+  id: string;
+  login: string;
+  bio: string;
+}
+
+interface SignInParams {
+  user: User;
+  profile: Profile;
+}
+
+interface Token {
+  id: string | undefined;
+}
+
+interface JwtParams {
+  token: Token;
+  account: object;
+  profile: Profile;
+}
+
+interface SessionParams {
+  session: object;
+  token: Token;
+}
+
+export const {
+  handlers,
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
 	providers: [Github, Google],
 	callbacks: {
 		// check if user sign in or not
 		async signIn({
 			user: { name, email, image },
 			profile: { id, login, bio },
-		}) {
+		}: SignInParams) {
 			const existingUser = await client
 				.withConfig({ useCdn: false })
 				.fetch(AUTHOR_BY_GITHUB_ID_QUERY, { id })
@@ -31,7 +72,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 			return true
 		},
-		async jwt({ token, account, profile }) {
+		async jwt({ token, account, profile }: JwtParams) {
 			if (account && profile) {
 				const user = await client
 					.withConfig({ useCdn: false })
@@ -42,7 +83,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 			return token
 		},
-		async session({ session, token }) {
+		async session({ session, token }: SessionParams) {
 			Object.assign(session, { id: token.id })
 
 			return session
