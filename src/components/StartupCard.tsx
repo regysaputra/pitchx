@@ -42,8 +42,8 @@ export default function StartupCard({ post }: { post: StartupTypeCard }) {
 				</div>
 				<Link href={`/user/${author?._id}`}>
 					<Image
-						src={author?.image}
-						alt={author?.name}
+						src={author?.image || "/author_fallback.png"}
+						alt={author?.name || "Name of author"}
 						width={48}
 						height={48}
 						className="rounded-full"
@@ -53,9 +53,9 @@ export default function StartupCard({ post }: { post: StartupTypeCard }) {
 
 			<Link href={`/startup/${_id}`}>
 				<p className="startup-card_desc">{description}</p>
-				<img
-					src={image}
-					alt="placeholder"
+				<Image
+					src={image || "/startup_fallback.png"}
+					alt="Startup placeholder"
 					className="startup-card_img"
 				/>
 			</Link>

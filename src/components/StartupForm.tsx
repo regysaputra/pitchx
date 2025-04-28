@@ -19,7 +19,7 @@ export default function StartupForm({}: Props) {
   const router = useRouter()
 	// const isPending = false
 
-  const handleFormSubmit = async (prevState: any, formData: FormData) => {
+  const handleFormSubmit = async (prevState: object, formData: FormData) => {
     try {
       const formValues = {
         title: formData.get("title") as string,
@@ -59,7 +59,7 @@ export default function StartupForm({}: Props) {
     }
   }
 
-  const [state, formAction, isPending] = React.useActionState(handleFormSubmit, {
+  const [, formAction, isPending] = React.useActionState(handleFormSubmit, {
     error: "",
     status: "INITIAL"
   })
